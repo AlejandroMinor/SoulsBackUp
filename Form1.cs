@@ -4,6 +4,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.IO;
 using System.Security.Permissions;
 
+
 namespace SoulBackUp
 {
     public partial class Main : Form
@@ -127,7 +128,6 @@ namespace SoulBackUp
 
                 string selectedPath = $@"C:\Users\{username}\Desktop";
 
-
                 // Crear un diccionario
                 Dictionary<string, string> dict = new Dictionary<string, string>();
                 dict.Add("destino", selectedPath);
@@ -226,18 +226,14 @@ namespace SoulBackUp
                     CopyDirectory(sourceDir, destinationDir + date);
                 }
 
+                MessageBox.Show($@"Se realizó correctamente la copia de seguridad en {rutaDestino}\SoulsBackUP\");
+
             }
             catch (Exception)
             {
                 MessageBox.Show("Error al generar los respaldos");
                 throw;
             }
-
-
-
-
-
-            //MessageBox.Show(fechaHoy.ToShortDateString());
 
 
         }
@@ -262,6 +258,16 @@ namespace SoulBackUp
             changePath();
             //Actualiza el txt que muestra la ruta actual
             showPathtxt();
+        }
+
+        private void githublogo_Click(object sender, EventArgs e)
+        {
+ 
+        }
+
+        private void devname_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
