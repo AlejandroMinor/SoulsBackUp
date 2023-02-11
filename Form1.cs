@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.IO;
+using System.Security.Permissions;
 
 namespace SoulBackUp
 {
@@ -10,13 +11,19 @@ namespace SoulBackUp
         public Main()
         {
             InitializeComponent();
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            showPathtxt();
+        }
+
+        private void showPathtxt() {
+          
+        pathtxt.Text = $"La ruta actual es {get_path()}";
+
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Mensaje al hacer clic en el botón");
-            
-
+           
         }
 
         private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
@@ -34,19 +41,142 @@ namespace SoulBackUp
             // Crea la carpeta de destino
             Directory.CreateDirectory(destDir);
 
-            // Copia los archivos de la carpeta de origen a la carpeta de destino
-            foreach (string file in Directory.GetFiles(sourceDir))
+
+            try
             {
-                string destFile = Path.Combine(destDir, Path.GetFileName(file));
-                File.Copy(file, destFile, true);
+                // Copia los archivos de la carpeta de origen a la carpeta de destino
+                foreach (string file in Directory.GetFiles(sourceDir))
+                {
+                    string destFile = Path.Combine(destDir, Path.GetFileName(file));
+                    File.Copy(file, destFile, true);
+                }
+
+                // Copia las subcarpetas de la carpeta de origen a la carpeta de destino
+                foreach (string subdir in Directory.GetDirectories(sourceDir))
+                {
+                    string destSubDir = Path.Combine(destDir, Path.GetFileName(subdir));
+                    CopyDirectory(subdir, destSubDir);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error en la ruta para " + sourceDir);
+                
+                throw;
             }
 
-            // Copia las subcarpetas de la carpeta de origen a la carpeta de destino
-            foreach (string subdir in Directory.GetDirectories(sourceDir))
+
+        }
+
+        private void changePath() {
+
+            try
             {
-                string destSubDir = Path.Combine(destDir, Path.GetFileName(subdir));
-                CopyDirectory(subdir, destSubDir);
+                // Nombre de usuario local se toma de forma automatica
+                string username = Environment.UserName;
+
+                string selectedPath = $@"C:\Users\{username}\Desktop";
+
+                using (var dialog = new FolderBrowserDialog())
+                {
+                    // Configura las opciones del cuadro de diálogo
+                    dialog.Description = "Selecciona una carpeta";
+                    dialog.ShowNewFolderButton = true;
+                    // dialog.InitialDirectory = origen;
+
+                    // Muestra el cuadro de diálogo y verifica si se hizo clic en el botón Aceptar
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        // Obtiene la ruta seleccionada por el usuario
+                        selectedPath = dialog.SelectedPath;
+
+                    }
+                }
+
+                // Crear un diccionario
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+                dict.Add("destino", selectedPath);
+
+                // Guardar el diccionario en un archivo de texto
+                using (StreamWriter file = new StreamWriter($@"cache.txt"))
+                {
+                    foreach (KeyValuePair<string, string> entry in dict)
+                    {
+                        file.WriteLine("{0},{1}", entry.Key, entry.Value);
+                    }
+                }
+
+                MessageBox.Show($"Nueva ruta establecida {selectedPath}");
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Error de acceso, intenta otra ruta ");
+                throw;
+            }
+
+        }
+
+
+        private void createDefaultPath()
+        {
+
+            try
+            {
+                // Nombre de usuario local se toma de forma automatica
+                string username = Environment.UserName;
+
+                string selectedPath = $@"C:\Users\{username}\Desktop";
+
+
+                // Crear un diccionario
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+                dict.Add("destino", selectedPath);
+
+                // Guardar el diccionario en un archivo de texto
+                using (StreamWriter file = new StreamWriter($@"cache.txt"))
+                {
+                    foreach (KeyValuePair<string, string> entry in dict)
+                    {
+                        file.WriteLine("{0},{1}", entry.Key, entry.Value);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error de acceso, intenta otra ruta ");
+                throw;
+            }
+
+        }
+
+        private string  get_path() {
+            string username = Environment.UserName;
+            string path = $@"C:\Users\{username}\Desktop";
+
+            try
+            {
+                using (StreamReader sr = new StreamReader($@"cache.txt"))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string linea = sr.ReadLine();
+                        string[] partes = linea.Split(',');
+                        string clave = partes[0];
+                        string valor = partes[1];
+                        path = valor;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                createDefaultPath();
+                throw;
+            }
+
+ 
+
+            return path;
+
         }
 
         private void backup_button_Click(object sender, EventArgs e)
@@ -59,12 +189,16 @@ namespace SoulBackUp
             // Nombre de usuario local se toma de forma automatica
             string username = Environment.UserName;
 
+            string rutaDestino = $@"C:\Users\{username}\Desktop";
+
+            rutaDestino = get_path();
+
             try
             {
                 if (darksouls2checkbox.Checked)
                 {
                     string sourceDir = $@"C:\Users\{username}\AppData\Roaming\DarkSoulsII";
-                    string destinationDir = $@"C:\Users\{username}\Desktop\SoulsBackUP\DarkSoulsII-BackUP-";
+                    string destinationDir = $@"{rutaDestino}\SoulsBackUP\DarkSoulsII-BackUP-";
                     CopyDirectory(sourceDir, destinationDir + date);
                 }
 
@@ -72,7 +206,7 @@ namespace SoulBackUp
                 {
 
                     string sourceDir = $@"C:\Users\{username}\AppData\Roaming\DarkSoulsIII";
-                    string destinationDir = $@"C:\Users\{username}\Desktop\SoulsBackUP\DarkSoulsIII-BackUP-";
+                    string destinationDir = $@"{rutaDestino}\SoulsBackUP\DarkSoulsIII-BackUP-";
                     CopyDirectory(sourceDir, destinationDir + date);
                 }
 
@@ -80,7 +214,7 @@ namespace SoulBackUp
                 {
 
                     string sourceDir = $@"C:\Users\{username}\AppData\Roaming\Sekiro";
-                    string destinationDir = $@"C:\Users\{username}\Desktop\SoulsBackUP\Sekiro-BackUP-";
+                    string destinationDir = $@"{rutaDestino}\SoulsBackUP\Sekiro-BackUP-";
                     CopyDirectory(sourceDir, destinationDir + date);
                 }
 
@@ -88,7 +222,7 @@ namespace SoulBackUp
                 {
 
                     string sourceDir = $@"C:\Users\{username}\AppData\Roaming\EldenRing";
-                    string destinationDir = $@"C:\Users\{username}\Desktop\SoulsBackUP\EldenRing-BackUP-";
+                    string destinationDir = $@"{rutaDestino}\SoulsBackUP\EldenRing-BackUP-";
                     CopyDirectory(sourceDir, destinationDir + date);
                 }
 
@@ -105,29 +239,29 @@ namespace SoulBackUp
 
             //MessageBox.Show(fechaHoy.ToShortDateString());
 
-            //using (var dialog = new FolderBrowserDialog())
-            //{
-            //    // Configura las opciones del cuadro de diálogo
-            //    dialog.Description = "Selecciona una carpeta";
-            //    dialog.ShowNewFolderButton = true;
-            //    dialog.InitialDirectory = origen;
 
-            //    // Muestra el cuadro de diálogo y verifica si se hizo clic en el botón Aceptar
-            //    if (dialog.ShowDialog() == DialogResult.OK)
-            //    {
-            //        // Obtiene la ruta seleccionada por el usuario
-            //        string selectedPath = dialog.SelectedPath;
-            //        MessageBox.Show(selectedPath);
-            //        // Usa la ruta seleccionada como sea necesario
-            //        // Por ejemplo, puedes mostrar la ruta en un cuadro de texto
-
-            //    }
-            //}
         }
 
         private void darksouls2checkbox_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void pathtxt_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void changepathbutton_Click(object sender, EventArgs e)
+        {
+            //Cambia el valor de la ruta del archivo txt 
+            changePath();
+            //Actualiza el txt que muestra la ruta actual
+            showPathtxt();
         }
     }
 }
