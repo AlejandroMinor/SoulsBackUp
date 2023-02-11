@@ -56,9 +56,5 @@ namespace SoulBackUp
             //}
         }
 
-        private void darksouls2checkbox_CheckedChanged(object sender, EventArgs e)
-        {
 
-        }
     }
-}
