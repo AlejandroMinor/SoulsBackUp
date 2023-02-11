@@ -57,7 +57,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="githublogo.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="githublogo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAAW9JREFUSEvd1M0rBVEYx/HxFlIsZWnnpSR/g5K36FqIhZ1/Q0mIpSULwsrews6f
+        oLyElJW3RNmww/fnztTjnDN3Dsv7q0/33LnPc+bOnDOTVH3qMIptnOAFrzhPj01BNf/KEK7wVeAG+hPR
+        qcEiPhGaMES161BvYZYQmiSGeitGl2obBjCOU3Mscw2tQZc5JsMIph66n7a4AUoz+tNP6UMbFC2y7blE
+        1vcrk7CF0omitMPt01V72YMt0i1oQlFU4+62HXjR3rZFJcRmArZXa+blGbaoFbFRre3Vw+jlDbboLyfQ
+        gtved3g5gy2aRmxmYHtv4WUftugO3ShKD+5hew/gJbRNP7ACTeKmF6tQjds3By96OLLttoDDdCwbcLOL
+        7HfrAY0IZgx6cWmROnCEx3TsRlcQOsEsKmYZKlz7+ZafWriTb6Iw2etaDRc4Rl7s5FvQ+yw6g8jWJC/6
+        7QnBRY2JbsNIeRjMPFrKw+pMknwDtpew++Onyj4AAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAZsAAAKLCAYAAAAgpiX+AAAABGdBTUEAALGeYUxB9wAAACBjSFJNAACH

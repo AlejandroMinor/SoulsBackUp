@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.PictureBox githublogo;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.label1 = new System.Windows.Forms.Label();
             this.backup_button = new System.Windows.Forms.Button();
@@ -40,10 +41,25 @@
             this.pathtxt = new System.Windows.Forms.Label();
             this.changepathbutton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.devname = new System.Windows.Forms.Label();
+            githublogo = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(githublogo)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // githublogo
+            // 
+            githublogo.Cursor = System.Windows.Forms.Cursors.Hand;
+            githublogo.Image = ((System.Drawing.Image)(resources.GetObject("githublogo.Image")));
+            githublogo.Location = new System.Drawing.Point(7, 281);
+            githublogo.Name = "githublogo";
+            githublogo.Size = new System.Drawing.Size(30, 27);
+            githublogo.TabIndex = 9;
+            githublogo.TabStop = false;
+            githublogo.Tag = "";
+            githublogo.Click += new System.EventHandler(this.githublogo_Click);
             // 
             // label1
             // 
@@ -57,7 +73,8 @@
             // 
             // backup_button
             // 
-            this.backup_button.Location = new System.Drawing.Point(220, 131);
+            this.backup_button.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.backup_button.Location = new System.Drawing.Point(220, 186);
             this.backup_button.Name = "backup_button";
             this.backup_button.Size = new System.Drawing.Size(75, 23);
             this.backup_button.TabIndex = 1;
@@ -121,9 +138,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(220, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(220, 59);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(83, 113);
+            this.pictureBox1.Size = new System.Drawing.Size(75, 92);
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -140,6 +157,7 @@
             // 
             // changepathbutton
             // 
+            this.changepathbutton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.changepathbutton.Location = new System.Drawing.Point(220, 263);
             this.changepathbutton.Name = "changepathbutton";
             this.changepathbutton.Size = new System.Drawing.Size(75, 23);
@@ -158,11 +176,25 @@
             this.panel1.Size = new System.Drawing.Size(281, 42);
             this.panel1.TabIndex = 8;
             // 
+            // devname
+            // 
+            this.devname.AutoSize = true;
+            this.devname.BackColor = System.Drawing.Color.Transparent;
+            this.devname.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.devname.Location = new System.Drawing.Point(33, 287);
+            this.devname.Name = "devname";
+            this.devname.Size = new System.Drawing.Size(101, 13);
+            this.devname.TabIndex = 10;
+            this.devname.Text = "@AlejandroMinor";
+            this.devname.Click += new System.EventHandler(this.devname_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(315, 311);
+            this.Controls.Add(this.devname);
+            this.Controls.Add(githublogo);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.changepathbutton);
             this.Controls.Add(this.pictureBox1);
@@ -176,6 +208,7 @@
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SoulsBackUP";
+            ((System.ComponentModel.ISupportInitialize)(githublogo)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -199,5 +232,7 @@
         private Label pathtxt;
         private Button changepathbutton;
         private Panel panel1;
+        private PictureBox githublogo;
+        private Label devname;
     }
 }
