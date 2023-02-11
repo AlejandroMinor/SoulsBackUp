@@ -10,6 +10,7 @@ namespace SoulBackUp
         public Main()
         {
             InitializeComponent();
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -34,19 +35,31 @@ namespace SoulBackUp
             // Crea la carpeta de destino
             Directory.CreateDirectory(destDir);
 
-            // Copia los archivos de la carpeta de origen a la carpeta de destino
-            foreach (string file in Directory.GetFiles(sourceDir))
+
+            try
             {
-                string destFile = Path.Combine(destDir, Path.GetFileName(file));
-                File.Copy(file, destFile, true);
+                // Copia los archivos de la carpeta de origen a la carpeta de destino
+                foreach (string file in Directory.GetFiles(sourceDir))
+                {
+                    string destFile = Path.Combine(destDir, Path.GetFileName(file));
+                    File.Copy(file, destFile, true);
+                }
+
+                // Copia las subcarpetas de la carpeta de origen a la carpeta de destino
+                foreach (string subdir in Directory.GetDirectories(sourceDir))
+                {
+                    string destSubDir = Path.Combine(destDir, Path.GetFileName(subdir));
+                    CopyDirectory(subdir, destSubDir);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error en la ruta para " + sourceDir);
+                
+                throw;
             }
 
-            // Copia las subcarpetas de la carpeta de origen a la carpeta de destino
-            foreach (string subdir in Directory.GetDirectories(sourceDir))
-            {
-                string destSubDir = Path.Combine(destDir, Path.GetFileName(subdir));
-                CopyDirectory(subdir, destSubDir);
-            }
+
         }
 
         private void backup_button_Click(object sender, EventArgs e)
@@ -128,6 +141,10 @@ namespace SoulBackUp
         private void darksouls2checkbox_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
         }
     }
 }
