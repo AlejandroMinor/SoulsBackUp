@@ -29,6 +29,75 @@ namespace SoulBackUp
             MessageBox.Show("Mensaje al hacer clic en el botón");
         }
 
+        public static void CopyDirectory(string sourceDir, string destDir)
+        {
+            // Crea la carpeta de destino
+            Directory.CreateDirectory(destDir);
+
+            // Copia los archivos de la carpeta de origen a la carpeta de destino
+            foreach (string file in Directory.GetFiles(sourceDir))
+            {
+                string destFile = Path.Combine(destDir, Path.GetFileName(file));
+                File.Copy(file, destFile, true);
+            }
+
+            // Copia las subcarpetas de la carpeta de origen a la carpeta de destino
+            foreach (string subdir in Directory.GetDirectories(sourceDir))
+            {
+                string destSubDir = Path.Combine(destDir, Path.GetFileName(subdir));
+                CopyDirectory(subdir, destSubDir);
+            }
+        }
+
+        private void backup_button_Click(object sender, EventArgs e)
+        {
+
+            DateTime today = DateTime.Now;
+            string date = today.ToString().Replace(":", "-");
+            date = date.Replace("/", "-");
+
+            // Nombre de usuario local se toma de forma automatica
+            string username = Environment.UserName;
+
+            try
+            {
+                if (darksouls2checkbox.Checked)
+                {
+                    string sourceDir = $@"C:\Users\{username}\AppData\Roaming\DarkSoulsII";
+                    string destinationDir = $@"C:\Users\{username}\Desktop\SoulsBackUP\DarkSoulsII-BackUP-";
+                    CopyDirectory(sourceDir, destinationDir + date);
+                }
+
+                if (darksouls3checkbox.Checked)
+                {
+
+                    string sourceDir = $@"C:\Users\{username}\AppData\Roaming\DarkSoulsIII";
+                    string destinationDir = $@"C:\Users\{username}\Desktop\SoulsBackUP\DarkSoulsIII-BackUP-";
+                    CopyDirectory(sourceDir, destinationDir + date);
+                }
+
+                if (sekirocheckbox.Checked)
+                {
+
+                    string sourceDir = $@"C:\Users\{username}\AppData\Roaming\Sekiro";
+                    string destinationDir = $@"C:\Users\{username}\Desktop\SoulsBackUP\Sekiro-BackUP-";
+                    CopyDirectory(sourceDir, destinationDir + date);
+                }
+
+                if (eldenringcheckbox.Checked)
+                {
+
+                    string sourceDir = $@"C:\Users\{username}\AppData\Roaming\EldenRing";
+                    string destinationDir = $@"C:\Users\{username}\Desktop\SoulsBackUP\EldenRing-BackUP-";
+                    CopyDirectory(sourceDir, destinationDir + date);
+                }
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al generar los respaldos");
+                throw;
+            }
 
 
 
@@ -56,5 +125,9 @@ namespace SoulBackUp
             //}
         }
 
+        private void darksouls2checkbox_CheckedChanged(object sender, EventArgs e)
+        {
 
+        }
     }
+}
