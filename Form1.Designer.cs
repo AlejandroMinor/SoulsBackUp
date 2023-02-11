@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.label1 = new System.Windows.Forms.Label();
             this.backup_button = new System.Windows.Forms.Button();
             this.darksouls2checkbox = new System.Windows.Forms.CheckBox();
@@ -87,7 +88,7 @@
             this.groupBox1.Controls.Add(this.darksouls3checkbox);
             this.groupBox1.Location = new System.Drawing.Point(14, 38);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 122);
+            this.groupBox1.Size = new System.Drawing.Size(200, 155);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             // 
@@ -119,7 +120,10 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.backup_button);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SoulsBackUP";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
