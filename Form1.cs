@@ -5,9 +5,9 @@ using System.IO;
 
 namespace SoulBackUp
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
-        public Form1()
+        public Main()
         {
             InitializeComponent();
         }
@@ -29,43 +29,12 @@ namespace SoulBackUp
             MessageBox.Show("Mensaje al hacer clic en el botón");
         }
 
-        public static void CopyDirectory(string sourceDir, string destDir)
-        {
-            // Crea la carpeta de destino
-            Directory.CreateDirectory(destDir);
 
-            // Copia los archivos de la carpeta de origen a la carpeta de destino
-            foreach (string file in Directory.GetFiles(sourceDir))
-            {
-                string destFile = Path.Combine(destDir, Path.GetFileName(file));
-                File.Copy(file, destFile, true);
-            }
 
-            // Copia las subcarpetas de la carpeta de origen a la carpeta de destino
-            foreach (string subdir in Directory.GetDirectories(sourceDir))
-            {
-                string destSubDir = Path.Combine(destDir, Path.GetFileName(subdir));
-                CopyDirectory(subdir, destSubDir);
-            }
-        }
 
-        private void backup_button_Click(object sender, EventArgs e)
-        {
 
-            DateTime fechaHoy = DateTime.Now;
-            string fecha = fechaHoy.ToShortDateString().Replace("/", "-");
 
-            string username = Environment.UserName;
-            string sourceDir = $@"C:\Users\{username}\AppData\Roaming\Prueba";
-            string destinationDir = $@"C:\Users\{username}\Desktop\Prueba";
-
-            // Copiar carpeta dark souls y pegar en escritorio
-
-            //File.Copy(origen, destino, true);
-
-            CopyDirectory(sourceDir, destinationDir+fecha);
-
-            MessageBox.Show(fechaHoy.ToShortDateString());
+            //MessageBox.Show(fechaHoy.ToShortDateString());
 
             //using (var dialog = new FolderBrowserDialog())
             //{
@@ -85,6 +54,11 @@ namespace SoulBackUp
 
             //    }
             //}
+        }
+
+        private void darksouls2checkbox_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
