@@ -4,6 +4,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.IO;
 using System.Security.Permissions;
 
+
 namespace SoulBackUp
 {
     public partial class Main : Form
@@ -127,7 +128,6 @@ namespace SoulBackUp
 
                 string selectedPath = $@"C:\Users\{username}\Desktop";
 
-
                 // Crear un diccionario
                 Dictionary<string, string> dict = new Dictionary<string, string>();
                 dict.Add("destino", selectedPath);
@@ -224,7 +224,19 @@ namespace SoulBackUp
                     string sourceDir = $@"C:\Users\{username}\AppData\Roaming\EldenRing";
                     string destinationDir = $@"{rutaDestino}\SoulsBackUP\EldenRing-BackUP-";
                     CopyDirectory(sourceDir, destinationDir + date);
+                    
                 }
+
+                if (darksoulscheckbox.Checked)
+                {
+                    string rutaMisDocumentos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    string sourceDir = $@"{rutaMisDocumentos}\NBGI";
+                    string destinationDir = $@"{rutaDestino}\SoulsBackUP\DarkSouls-BackUP-";
+                    CopyDirectory(sourceDir, destinationDir + date);
+                }
+
+
+                MessageBox.Show($@"Se realizó correctamente la copia de seguridad en {rutaDestino}\SoulsBackUP\");
 
             }
             catch (Exception)
@@ -232,12 +244,6 @@ namespace SoulBackUp
                 MessageBox.Show("Error al generar los respaldos");
                 throw;
             }
-
-
-
-
-
-            //MessageBox.Show(fechaHoy.ToShortDateString());
 
 
         }
@@ -262,6 +268,26 @@ namespace SoulBackUp
             changePath();
             //Actualiza el txt que muestra la ruta actual
             showPathtxt();
+        }
+
+        private void githublogo_Click(object sender, EventArgs e)
+        {
+ 
+        }
+
+        private void devname_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void darksoulscheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
