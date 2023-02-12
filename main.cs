@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.IO;
@@ -34,7 +34,7 @@ namespace SoulBackUp
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Mensaje al hacer clic en el bot�n");
         }
 
         public static void CopyDirectory(string sourceDir, string destDir)
@@ -61,7 +61,7 @@ namespace SoulBackUp
             }
             catch (Exception)
             {
-                MessageBox.Show("Error en la ruta para " + sourceDir,"ERROR");
+                MessageBox.Show("Error en la ruta para " + sourceDir);
                 
                 throw;
             }
@@ -81,12 +81,12 @@ namespace SoulBackUp
 
                 using (var dialog = new FolderBrowserDialog())
                 {
-                    // Configura las opciones del cuadro de diálogo
+                    // Configura las opciones del cuadro de di�logo
                     dialog.Description = "Selecciona una carpeta";
                     dialog.ShowNewFolderButton = true;
                     // dialog.InitialDirectory = origen;
 
-                    // Muestra el cuadro de diálogo y verifica si se hizo clic en el botón Aceptar
+                    // Muestra el cuadro de di�logo y verifica si se hizo clic en el bot�n Aceptar
                     if (dialog.ShowDialog() == DialogResult.OK)
                     {
                         // Obtiene la ruta seleccionada por el usuario
@@ -110,13 +110,13 @@ namespace SoulBackUp
                 }
 
                 if (selectedPath != rutaMisDocumentos) {
-                    MessageBox.Show($"Nueva ruta establecida {selectedPath}","Alerta");
+                    MessageBox.Show($"Nueva ruta establecida {selectedPath}");
                 }
                 
             }
             catch (Exception)
             {
-                MessageBox.Show("Error de acceso, intenta otra ruta ", "Alerta");
+                MessageBox.Show("Error de acceso, intenta otra ruta ");
                 throw;
             }
 
@@ -147,11 +147,11 @@ namespace SoulBackUp
                         file.WriteLine("{0},{1}", entry.Key, entry.Value);
                     }
                 }
-                MessageBox.Show("Se generó el archivo cache.txt, este sirve para guardar la ruta de almacenamiento.", "Alerta");
+                MessageBox.Show("Se gener� el archivo cache.txt, este sirve para guardar la ruta de almacenamiento.");
             }
             catch (Exception)
             {
-                MessageBox.Show("Error de acceso, intenta otra ruta ", "Error");
+                MessageBox.Show("Error de acceso, intenta otra ruta ");
                 throw;
             }
 
@@ -183,7 +183,7 @@ namespace SoulBackUp
             }
             catch (Exception)
             {
-                MessageBox.Show("Error al leer archivo", "Error");
+                MessageBox.Show("Error al leer archivo");
                 throw;
             }
 
@@ -191,19 +191,6 @@ namespace SoulBackUp
 
             return path;
 
-        }
-
-
-        private Boolean verifyPath(String path) {
-
-            if (Directory.Exists(path))
-            {
-                return true;
-            }
-            else {
-                MessageBox.Show($"Error no se cuentra la ruta {path}", "Error");
-                return false;
-            } 
         }
 
         private void backup_button_Click(object sender, EventArgs e)
@@ -221,35 +208,13 @@ namespace SoulBackUp
 
             rutaDestino = get_path();
 
-            string log = "";
-
             try
             {
-
-                if (darksoulscheckbox.Checked)
-                {
-
-                    string sourceDir = $@"{rutaMisDocumentos}\NBGI";
-                    string destinationDir = $@"{rutaDestino}\SoulsBackUP\DarkSouls-BackUP-";
-                    if (verifyPath(sourceDir))
-                    {
-                        CopyDirectory(sourceDir, destinationDir + date);
-                        log += " -> Dark Souls (Prepare to Die / Remastered) ✔\n";
-                    }
-                    else log += " -> Dark Souls (Prepare to Die / Remastered) ❌\n";
-
-                }
-
                 if (darksouls2checkbox.Checked)
                 {
                     string sourceDir = $@"C:\Users\{username}\AppData\Roaming\DarkSoulsII";
                     string destinationDir = $@"{rutaDestino}\SoulsBackUP\DarkSoulsII-BackUP-";
-                    if (verifyPath(sourceDir))
-                    {
-                        CopyDirectory(sourceDir, destinationDir + date);
-                        log += " -> Dark Souls II ✔\n";
-                    }
-                    else log += " -> Dark Souls II ❌\n";
+                    CopyDirectory(sourceDir, destinationDir + date);
                 }
 
                 if (darksouls3checkbox.Checked)
@@ -257,12 +222,7 @@ namespace SoulBackUp
 
                     string sourceDir = $@"C:\Users\{username}\AppData\Roaming\DarkSoulsIII";
                     string destinationDir = $@"{rutaDestino}\SoulsBackUP\DarkSoulsIII-BackUP-";
-                    if (verifyPath(sourceDir))
-                    {
-                        CopyDirectory(sourceDir, destinationDir + date);
-                        log += " -> Dark Souls III ✔\n";
-                    }
-                    else log += " -> Dark Souls III ❌\n";
+                    CopyDirectory(sourceDir, destinationDir + date);
                 }
 
                 if (sekirocheckbox.Checked)
@@ -270,12 +230,7 @@ namespace SoulBackUp
 
                     string sourceDir = $@"C:\Users\{username}\AppData\Roaming\Sekiro";
                     string destinationDir = $@"{rutaDestino}\SoulsBackUP\Sekiro-BackUP-";
-                    if (verifyPath(sourceDir))
-                    {
-                        CopyDirectory(sourceDir, destinationDir + date);
-                        log += " -> Sekiro ✔\n";
-                    }
-                    else log += " -> Sekiro ❌\n";
+                    CopyDirectory(sourceDir, destinationDir + date);
                 }
 
                 if (eldenringcheckbox.Checked)
@@ -283,24 +238,25 @@ namespace SoulBackUp
 
                     string sourceDir = $@"C:\Users\{username}\AppData\Roaming\EldenRing";
                     string destinationDir = $@"{rutaDestino}\SoulsBackUP\EldenRing-BackUP-";
-                    if (verifyPath(sourceDir))
-                    {
-                        CopyDirectory(sourceDir, destinationDir + date);
-                        log += " -> Elden Ring ✔\n";
-                    }
-                    else log += " -> Elden Ring ❌\n";
+                    CopyDirectory(sourceDir, destinationDir + date);
+                    
+                }
 
+                if (darksoulscheckbox.Checked)
+                {
+                    
+                    string sourceDir = $@"{rutaMisDocumentos}\NBGI";
+                    string destinationDir = $@"{rutaDestino}\SoulsBackUP\DarkSouls-BackUP-";
+                    CopyDirectory(sourceDir, destinationDir + date);
                 }
 
 
-
-
-                MessageBox.Show(" 💾 Copia de seguridad disponible en: \n" + $@" 📁 {rutaDestino}\SoulsBackUP "+ " \n \n Log de eventos: \n" + log,"SoulsBackUP - Resultados");
+                MessageBox.Show($@"Se realiz� correctamente la copia de seguridad en {rutaDestino}\SoulsBackUP\");
 
             }
             catch (Exception)
             {
-                MessageBox.Show("Error al generar los respaldos", "Error");
+                MessageBox.Show("Error al generar los respaldos");
                 throw;
             }
 
@@ -331,22 +287,12 @@ namespace SoulBackUp
 
         private void githublogo_Click(object sender, EventArgs e)
         {
-            Process process = new Process();
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.Arguments = "/c start https://github.com/AlejandroMinor/SoulsBackUp";
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.Start();
+ 
         }
 
         private void devname_Click(object sender, EventArgs e)
         {
-            Process process = new Process();
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.Arguments = "/c start https://github.com/AlejandroMinor";
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.Start();
+
         }
 
         private void darksoulscheckbox_CheckedChanged(object sender, EventArgs e)
