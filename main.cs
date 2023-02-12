@@ -76,7 +76,8 @@ namespace SoulBackUp
                 // Nombre de usuario local se toma de forma automatica
                 string username = Environment.UserName;
 
-                string selectedPath = $@"C:\Users\{username}\Desktop";
+                string rutaMisDocumentos = get_path();
+                string selectedPath = rutaMisDocumentos;
 
                 using (var dialog = new FolderBrowserDialog())
                 {
@@ -92,6 +93,7 @@ namespace SoulBackUp
                         selectedPath = dialog.SelectedPath;
 
                     }
+
                 }
 
                 // Crear un diccionario
@@ -107,7 +109,10 @@ namespace SoulBackUp
                     }
                 }
 
-                MessageBox.Show($"Nueva ruta establecida {selectedPath}");
+                if (selectedPath != rutaMisDocumentos) {
+                    MessageBox.Show($"Nueva ruta establecida {selectedPath}");
+                }
+                
             }
             catch (Exception)
             {
@@ -126,7 +131,9 @@ namespace SoulBackUp
                 // Nombre de usuario local se toma de forma automatica
                 string username = Environment.UserName;
 
-                string selectedPath = $@"C:\Users\{username}\Desktop";
+                string rutaMisDocumentos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string selectedPath = rutaMisDocumentos;
+                
 
                 // Crear un diccionario
                 Dictionary<string, string> dict = new Dictionary<string, string>();
@@ -140,6 +147,7 @@ namespace SoulBackUp
                         file.WriteLine("{0},{1}", entry.Key, entry.Value);
                     }
                 }
+                MessageBox.Show("Se generó el archivo cache.txt, este sirve para guardar la ruta de almacenamiento.");
             }
             catch (Exception)
             {
@@ -151,7 +159,13 @@ namespace SoulBackUp
 
         private string  get_path() {
             string username = Environment.UserName;
-            string path = $@"C:\Users\{username}\Desktop";
+
+            string rutaMisDocumentos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string path = rutaMisDocumentos;
+            
+            if (!File.Exists($@"cache.txt")){
+                createDefaultPath();
+            }
 
             try
             {
@@ -169,7 +183,7 @@ namespace SoulBackUp
             }
             catch (Exception)
             {
-                createDefaultPath();
+                MessageBox.Show("Error al leer archivo");
                 throw;
             }
 
@@ -189,7 +203,8 @@ namespace SoulBackUp
             // Nombre de usuario local se toma de forma automatica
             string username = Environment.UserName;
 
-            string rutaDestino = $@"C:\Users\{username}\Desktop";
+            string rutaMisDocumentos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string rutaDestino = rutaMisDocumentos;
 
             rutaDestino = get_path();
 
@@ -229,7 +244,7 @@ namespace SoulBackUp
 
                 if (darksoulscheckbox.Checked)
                 {
-                    string rutaMisDocumentos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    
                     string sourceDir = $@"{rutaMisDocumentos}\NBGI";
                     string destinationDir = $@"{rutaDestino}\SoulsBackUP\DarkSouls-BackUP-";
                     CopyDirectory(sourceDir, destinationDir + date);
@@ -286,6 +301,11 @@ namespace SoulBackUp
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Main_Load(object sender, EventArgs e)
         {
 
         }
