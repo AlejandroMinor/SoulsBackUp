@@ -227,13 +227,13 @@ namespace SoulBackUp
                     
                 }
 
-                //if (darksoulscheckbox.Checked)
-                //{
-                //    //string rutaMisDocumentos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                //    string sourceDir = $@"C:\Users\{username}\AppData\Roaming\EldenRing";
-                //    string destinationDir = $@"{rutaDestino}\SoulsBackUP\DarkSouls-BackUP-";
-                //    CopyDirectory(sourceDir, destinationDir + date);
-                //}
+                if (darksoulscheckbox.Checked)
+                {
+                    string rutaMisDocumentos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    string sourceDir = $@"{rutaMisDocumentos}\NBGI";
+                    string destinationDir = $@"{rutaDestino}\SoulsBackUP\DarkSouls-BackUP-";
+                    CopyDirectory(sourceDir, destinationDir + date);
+                }
 
 
                 MessageBox.Show($@"Se realizó correctamente la copia de seguridad en {rutaDestino}\SoulsBackUP\");
@@ -280,5 +280,14 @@ namespace SoulBackUp
 
         }
 
+        private void darksoulscheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
