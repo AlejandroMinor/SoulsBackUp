@@ -363,5 +363,25 @@ namespace SoulBackUp
         {
 
         }
+
+        private void selectallcheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (selectallcheckbox.Checked)
+            {
+                darksoulscheckbox.Checked = true;
+                darksouls2checkbox.Checked = true;
+                darksouls3checkbox.Checked = true;
+                sekirocheckbox.Checked = true;
+                eldenringcheckbox.Checked = true;
+            }
+            else {
+
+                darksoulscheckbox.Checked = false;
+                darksouls2checkbox.Checked = false;
+                darksouls3checkbox.Checked = false;
+                sekirocheckbox.Checked = false;
+                eldenringcheckbox.Checked = false;
+            }
+        }
     }
 }
