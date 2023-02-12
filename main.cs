@@ -281,7 +281,7 @@ namespace SoulBackUp
                 if (eldenringcheckbox.Checked)
                 {
 
-                    string sourceDir = $@"C:\Users\{username}\AppData\Roaming\EldenRingx";
+                    string sourceDir = $@"C:\Users\{username}\AppData\Roaming\EldenRing";
                     string destinationDir = $@"{rutaDestino}\SoulsBackUP\EldenRing-BackUP-";
                     if (verifyPath(sourceDir))
                     {
@@ -331,12 +331,22 @@ namespace SoulBackUp
 
         private void githublogo_Click(object sender, EventArgs e)
         {
- 
+            Process process = new Process();
+            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.Arguments = "/c start https://github.com/AlejandroMinor/SoulsBackUp";
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.Start();
         }
 
         private void devname_Click(object sender, EventArgs e)
         {
-
+            Process process = new Process();
+            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.Arguments = "/c start https://github.com/AlejandroMinor";
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.Start();
         }
 
         private void darksoulscheckbox_CheckedChanged(object sender, EventArgs e)
