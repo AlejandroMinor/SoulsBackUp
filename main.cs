@@ -224,7 +224,17 @@ namespace SoulBackUp
                     string sourceDir = $@"C:\Users\{username}\AppData\Roaming\EldenRing";
                     string destinationDir = $@"{rutaDestino}\SoulsBackUP\EldenRing-BackUP-";
                     CopyDirectory(sourceDir, destinationDir + date);
+                    
                 }
+
+                //if (darksoulscheckbox.Checked)
+                //{
+                //    //string rutaMisDocumentos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                //    string sourceDir = $@"C:\Users\{username}\AppData\Roaming\EldenRing";
+                //    string destinationDir = $@"{rutaDestino}\SoulsBackUP\DarkSouls-BackUP-";
+                //    CopyDirectory(sourceDir, destinationDir + date);
+                //}
+
 
                 MessageBox.Show($@"Se realizó correctamente la copia de seguridad en {rutaDestino}\SoulsBackUP\");
 
@@ -269,5 +279,6 @@ namespace SoulBackUp
         {
 
         }
+
     }
 }
