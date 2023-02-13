@@ -11,6 +11,22 @@ namespace SoulBackUp
         {
             InitializeComponent();
             dsimage.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            string configFile = Path.Combine(AppContext.BaseDirectory, "SoulBackUp.dll.config");
+
+            if (!File.Exists(configFile))
+            {
+                // Configurar valores predeterminados
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.AppSettings.Settings.Add("destino", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+                config.AppSettings.Settings.Add("primera_ejecucion", "true");
+                config.Save(ConfigurationSaveMode.Modified);
+
+                // Mover el archivo de configuración a la ubicación correcta
+                File.Move(config.FilePath, Path.ChangeExtension(config.FilePath, ".config"));
+            }
+
+
             showPathtxt();
 
             //Comprobando primera vez abriendo el programa 
@@ -22,6 +38,9 @@ namespace SoulBackUp
                 config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("appSettings");
             }
+
+
+
 
         }
 

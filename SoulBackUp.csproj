@@ -10,6 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="App.config" />
+  </ItemGroup>
+  
+  <PropertyGroup>
+  <IncludeAppConfigInBuild>true</IncludeAppConfigInBuild>
+</PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="App.config" />
     <Content Include="img\icons8-fire-70.ico" />
   </ItemGroup>
 
