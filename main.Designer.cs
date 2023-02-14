@@ -35,6 +35,7 @@
             this.darksouls2checkbox = new System.Windows.Forms.CheckBox();
             this.darksouls3checkbox = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.selectallcheckbox = new System.Windows.Forms.CheckBox();
             this.darksoulscheckbox = new System.Windows.Forms.CheckBox();
             this.eldenringcheckbox = new System.Windows.Forms.CheckBox();
             this.sekirocheckbox = new System.Windows.Forms.CheckBox();
@@ -42,13 +43,12 @@
             this.changepathbutton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.devname = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.selectallcheckbox = new System.Windows.Forms.CheckBox();
+            this.dsimage = new System.Windows.Forms.PictureBox();
             githublogo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(githublogo)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsimage)).BeginInit();
             this.SuspendLayout();
             // 
             // githublogo
@@ -74,7 +74,6 @@
             this.label1.Size = new System.Drawing.Size(163, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Elige los juegos a respaldar";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // backup_button
             // 
@@ -98,7 +97,6 @@
             this.darksouls2checkbox.TabIndex = 2;
             this.darksouls2checkbox.Text = "Dark Souls II";
             this.darksouls2checkbox.UseVisualStyleBackColor = true;
-            this.darksouls2checkbox.CheckedChanged += new System.EventHandler(this.darksouls2checkbox_CheckedChanged);
             // 
             // darksouls3checkbox
             // 
@@ -128,7 +126,16 @@
             this.groupBox1.Size = new System.Drawing.Size(208, 154);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // selectallcheckbox
+            // 
+            this.selectallcheckbox.AutoSize = true;
+            this.selectallcheckbox.Location = new System.Drawing.Point(3, 9);
+            this.selectallcheckbox.Name = "selectallcheckbox";
+            this.selectallcheckbox.Size = new System.Drawing.Size(15, 14);
+            this.selectallcheckbox.TabIndex = 7;
+            this.selectallcheckbox.UseVisualStyleBackColor = true;
+            this.selectallcheckbox.CheckedChanged += new System.EventHandler(this.selectallcheckbox_CheckedChanged);
             // 
             // darksoulscheckbox
             // 
@@ -140,7 +147,6 @@
             this.darksoulscheckbox.TabIndex = 6;
             this.darksoulscheckbox.Text = "Dark Souls (PTDE / Remastered)";
             this.darksoulscheckbox.UseVisualStyleBackColor = true;
-            this.darksoulscheckbox.CheckedChanged += new System.EventHandler(this.darksoulscheckbox_CheckedChanged);
             // 
             // eldenringcheckbox
             // 
@@ -173,7 +179,6 @@
             this.pathtxt.Size = new System.Drawing.Size(94, 13);
             this.pathtxt.TabIndex = 6;
             this.pathtxt.Text = "La ruta actual es ";
-            this.pathtxt.Click += new System.EventHandler(this.pathtxt_Click);
             // 
             // changepathbutton
             // 
@@ -213,26 +218,15 @@
             this.devname.Text = "@AlejandroMinor";
             this.devname.Click += new System.EventHandler(this.devname_Click);
             // 
-            // pictureBox1
+            // dsimage
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(215, 62);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(95, 88);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // selectallcheckbox
-            // 
-            this.selectallcheckbox.AutoSize = true;
-            this.selectallcheckbox.Location = new System.Drawing.Point(3, 9);
-            this.selectallcheckbox.Name = "selectallcheckbox";
-            this.selectallcheckbox.Size = new System.Drawing.Size(15, 14);
-            this.selectallcheckbox.TabIndex = 7;
-            this.selectallcheckbox.UseVisualStyleBackColor = true;
-            this.selectallcheckbox.CheckedChanged += new System.EventHandler(this.selectallcheckbox_CheckedChanged);
+            this.dsimage.Image = ((System.Drawing.Image)(resources.GetObject("dsimage.Image")));
+            this.dsimage.Location = new System.Drawing.Point(215, 62);
+            this.dsimage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dsimage.Name = "dsimage";
+            this.dsimage.Size = new System.Drawing.Size(95, 88);
+            this.dsimage.TabIndex = 5;
+            this.dsimage.TabStop = false;
             // 
             // Main
             // 
@@ -246,7 +240,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.backup_button);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.dsimage);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -262,7 +256,7 @@
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsimage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -282,7 +276,7 @@
         private Panel panel1;
         private PictureBox githublogo;
         private Label devname;
-        private PictureBox pictureBox1;
+        private PictureBox dsimage;
         private CheckBox darksoulscheckbox;
         private CheckBox selectallcheckbox;
     }
